@@ -4,8 +4,9 @@ This is an example project for libOTe applications. There are the following cpp 
 
  - projTemp library: this is the main library where the core code should go
  - tests library: this is where all the tests should go
- - frontent: this is an executable. Unit tests and the main application can be launched from here.
+ - frontend: this is an executable. Unit tests and the main application can be launched from here.
 
+When using `build.py`, output files are written to `out/build/<platform>`. For example, on linux the executable is written to `out/build/linux/frontend/frontend`. 
 
 ## cmake 
 
@@ -31,4 +32,6 @@ As mentioned, `thirdparty/getXXX.cmake` is used to automaticly download and buil
 
  - Dependancies are downloaded into the `thirdparty/` directory and then installed to `<src-tree>/out/install/<platform>/`. This is where cmake will look for the dependancies. When the user calls `cmake install`, we also install the dependancies to their specified locations. This "user install" case is handled at the end of `thirdparty/getXXX.cmake` file.
 
+## build.py
 
+For convenience, there is a helper script `build.py`. This allows for an easy way to build the library. For more options, call `python3 build.py --help`. Note: when using visual studio, there are some issues in that visual studio uses the Ninja generator while the `build.py` uses the visual studio generator. If you first call `build.py`, then open the project in visual studio there will be a configure error. However, the reverse order does work (open is visual studio and then call `build.py`).

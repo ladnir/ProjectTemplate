@@ -1,7 +1,7 @@
 
 set(DEP_NAME            libOTe)          
 set(GIT_REPOSITORY      "https://github.com/osu-crypto/libOTe.git")
-set(GIT_TAG             2434cef5ac7ba389f3e93d59af6a77c399b3eb54)
+set(GIT_TAG             6062385cd8295900d1ebf38ef6ea1b1593df25fb)
 
 set(CLONE_DIR "${CMAKE_CURRENT_LIST_DIR}/${DEP_NAME}")
 set(BUILD_DIR "${CLONE_DIR}/out/build/${PROJTEMP_CONFIG}")
@@ -71,8 +71,8 @@ endif()
 # this command gets run when the user calls cmake install. This will install libOTe.
 install(CODE "
     execute_process(
-        COMMAND ${SUDO} \${CMAKE_COMMAND} --install ${BUILD_DIR}  --config ${CMAKE_BUILD_TYPE} --prefix \${CMAKE_INSTALL_PREFIX}
-        WORKING_DIRECTORY ${CLONE_DIR}
+        COMMAND ${SUDO} \${CMAKE_COMMAND} --install \"${BUILD_DIR}\"  --config ${CMAKE_BUILD_TYPE} --prefix \${CMAKE_INSTALL_PREFIX}
+        WORKING_DIRECTORY \"${CLONE_DIR}\"
         RESULT_VARIABLE RESULT
         COMMAND_ECHO STDOUT
     )

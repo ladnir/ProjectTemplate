@@ -1,7 +1,7 @@
 
 set(DEP_NAME            libOTe)          
 set(GIT_REPOSITORY      "https://github.com/osu-crypto/libOTe.git")
-set(GIT_TAG             b6acad8d307a67e05d635998f29d73ff88d0f8a7)
+set(GIT_TAG             a80d405c4a1af7b62233db556bc00850a7c68250 )
 
 set(CLONE_DIR "${CMAKE_CURRENT_LIST_DIR}/${DEP_NAME}")
 set(BUILD_DIR "${CLONE_DIR}/out/build/${PROJTEMP_CONFIG}")

@@ -1,0 +1,5 @@
+#pragma once
+
+
+// compile the library with feature X
+#cmakedefine PROJTEMP_ENABLE_X @PROJTEMP_ENABLE_X@ 

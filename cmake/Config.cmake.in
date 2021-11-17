@@ -1,0 +1,17 @@
+@PACKAGE_INIT@
+
+include("${CMAKE_CURRENT_LIST_DIR}/projTempTargets.cmake")
+
+# when someone finds our project, we must then find our depandancies. 
+include("${CMAKE_CURRENT_LIST_DIR}/findDependancies.cmake")
+
+# define any variables you want consumers of your library ro be able to see.
+set(PROJTEMP_ENABLE_X     @PROJTEMP_ENABLE_X@)
+
+# set the library location and header location info from the target.
+get_target_property(projTemp_INCLUDE_DIRS pt::projTemp INTERFACE_INCLUDE_DIRECTORIES)
+get_target_property(projTemp_LIBRARIES pt::projTemp LOCATION)
+
+# print helper info on where the project was found. 
+message("projTemp_INCLUDE_DIRS=${projTemp_INCLUDE_DIRS}")
+message("projTemp_LIBRARIES=${projTemp_LIBRARIES}")

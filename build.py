@@ -2,6 +2,36 @@ import os
 import platform
 import sys
 import multiprocessing
+import subprocess
+import glob
+
+# find the ninja generator on windows.
+def getGenerator(args):
+    #osStr = (platform.system())
+    #
+    #if osStr == "Windows":
+    #
+    #    for x in args:
+    #        if x.startswith("-G"):
+    #            break
+    #
+    #    vswhereArgs = ['C:/Program Files (x86)/Microsoft Visual Studio/Installer/vswhere.exe', "-prerelease", "-latest", "-property", "installationPath"]
+    #    rootpath = subprocess.check_output(vswhereArgs).decode("utf-8").strip()
+    #
+    #    ninja = rootpath + "/COMMON7/IDE/COMMONEXTENSIONS/MICROSOFT/CMAKE/Ninja/ninja.exe"
+    #    cl = rootpath + "/VC/Tools/MSVC/*/bin/Hostx64/x64/cl.exe"
+    #    cls = glob.glob(cl)
+    #    if len(cls) > 0:
+    #        cl = cls[-1];
+    #
+    #    # use ninja
+    #    if os.path.exists(ninja) and os.path.exists(cl):
+    #        return "-G \"Ninja\"  -DCMAKE_MAKE_PROGRAM=\"{0}\" -DCMAKE_C_COMPILER:FILEPATH=\"{1}\" -DCMAKE_CXX_COMPILER:FILEPATH=\"{1}\" ".format(ninja, cl)
+    #    else:
+    #        print("failed to find ninja at: {0}\n or cl".format(ninja))
+    #
+    # use the default
+    return ""
 
 
 def parseInstallArgs(args):
@@ -57,6 +87,8 @@ def Build(projectName, argv):
     if not sudo:
         argv.append("-DSUDO_FETCH=OFF")
 
+    generator = getGenerator(argv)
+
     # do not automaticly download dependancies
     if "--noauto" in argv:
         argv = replace(argv, "--noauto", "")
@@ -109,7 +141,7 @@ def Build(projectName, argv):
 
     # build commands
     mkDirCmd = "mkdir -p {0}".format(buildDir); 
-    CMakeCmd = "cmake -S . -B {0} {1}".format(buildDir, argStr)
+    CMakeCmd = "cmake  {0} -S . -B {1} {2} ".format(generator, buildDir, argStr)
     BuildCmd = "cmake --build {0} {1} {2} ".format(buildDir, config, parallel)
     InstallCmd = ""
     if sudo:
